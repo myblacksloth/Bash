@@ -36,7 +36,7 @@ do
 	# echo "teststringa= ${teststringa}"
 	# read x
 	# if (( $teststringa != 0 )); then
-	if [ "$teststringa" -eq "0" ]; then
+	if [ "$teststringa" -ne "0" ]; then
 		wget -P ./downloading/ $urlpage
 		testdownload=$?
 		# if (( $testdownload != 0 )); then

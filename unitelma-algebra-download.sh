@@ -1,7 +1,9 @@
 #!/bin/bash
 # (C) Antonio Maulucci 2020
+# antomau.com || sites.google.com/view/antomau
 
-# downloaded  downloading  script  file
+# ls:
+# downloaded  downloading  script  file logfile.txt
 
 # put urls to video inside "file"
 
@@ -28,7 +30,8 @@ materia="algebra"
 
 while read -r urlpage
 do
-	grep -q ${urlpage} '#' # returns 0 if ok or not 0 if not ok
+	grep -q ${urlpage} '#' # returns 0 if ok or not 0 if not ok === to enable comments inside file
+	# every string containing '#' is considered as a comment!
 	teststringa=$?
 	# echo "teststringa= ${teststringa}"
 	# read x
@@ -49,7 +52,7 @@ do
 		mv "${filename}" "${materia}-${i}.mp4"
 		exitcode=$?
 		if (( $exitcode != 0 )); then
-			echo "===== error while reneaming ${filename} ... ${i}"
+			echo "===== error while reneaming ${filename} ... ${i}" >> logfile.txt
 		fi
 		mv * ../downloaded/
 		exitcode=$?

@@ -30,7 +30,7 @@ materia="algebra"
 
 while read -r urlpage
 do
-	grep -q ${urlpage} '#' # returns 0 if ok or not 0 if not ok === to enable comments inside file
+	echo -n ${urlpage} | grep -q '#' # returns 0 if ok or not 0 if not ok === to enable comments inside file
 	# every string containing '#' is considered as a comment!
 	teststringa=$?
 	# echo "teststringa= ${teststringa}"

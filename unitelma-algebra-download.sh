@@ -41,6 +41,7 @@ do
 		testdownload=$?
 		# if (( $testdownload != 0 )); then
 		if [ "$testdownload" -ne "0" ]; then
+			date >> logfile.txt
 			echo "========= ERROR =========" >> logfile.txt
 			echo ${i} >> logfile.txt
 			echo ${urlpage} >> logfile.txt
@@ -48,24 +49,26 @@ do
 		else
 			echo "downloaded ${i}" >> logfile.txt
 		fi
+		###############
 		cd ./downloading/
 		filename=$(ls | awk '{print $1}') # si presume che nella directory vi sia solo il file appena scaricato
-		echo "reneaming ${filename} to ${materia}-${i}.mp4" >> logfile.txt
+		echo "reneaming ${filename} to ${materia}-${i}.mp4" >> ../logfile.txt
 		mv "${filename}" "${materia}-${i}.mp4"
 		exitcode=$?
 		# if (( $exitcode != 0 )); then
 		if [ "$exitcode" -ne "0" ]; then
-			echo "===== error while reneaming ${filename} ... ${i}" >> logfile.txt
+			echo "===== error while reneaming ${filename} ... ${i}" >> ../logfile.txt
 		fi
 		mv * ../downloaded/
 		exitcode=$?
 		# if (( $exitcode == 0 )); then
 		if [ "$exitcode" -eq "0" ]; then
-			echo "${materia}-${i}.mp4 moved to downloaded" >> logfile.txt
+			echo "${materia}-${i}.mp4 moved to downloaded" >> ../logfile.txt
 		else
-			echo "===== error while moving ${materia}-${i}.mp4" >> logfile.txt
+			echo "===== error while moving ${materia}-${i}.mp4" >> ../logfile.txt
 		fi
 		cd ..
+		###############
 		((i+=1))
 	fi
 	##############################

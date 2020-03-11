@@ -3,7 +3,7 @@
 # antomau.com || sites.google.com/view/antomau
 
 # ls:
-# downloaded  downloading  script  file logfile.txt
+# downloaded/  downloading/  script  file logfile.txt
 
 # put urls to video inside "file"
 

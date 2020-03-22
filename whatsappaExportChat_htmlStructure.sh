@@ -15,7 +15,7 @@ read p1
 echo "people2's name: other?"
 read p2
 
-touch outfile
+touch $outfile
 
 echo "<!DOCTYPE HTML><html><head></head><body>" >> $outfile # start html page
 echo "<center><table border='1' width='100%'>" >> $outfile
@@ -26,9 +26,9 @@ do
 	output=$?
 	if [ "$output" -eq "0" ]; then # l'interlocutore e' p1 ovvero me (a destra)
 		# msg=$(echo $line | )
-	echo -n "<tr><td></td><td>" >> $outfile
-	echo -n $line >> $outfile
-	echo "</td></tr>" >> $outfile
+		echo -n "<tr><td></td><td>" >> $outfile
+		echo -n $line >> $outfile
+		echo "</td></tr>" >> $outfile
 	else # altra persona (a sinistra)
 		echo -n "<tr><td>" >> $outfile
 		echo -n $line >> $outfile

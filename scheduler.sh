@@ -1,8 +1,10 @@
 #!/bin/bash
 
-
 # /bin/bash -c "/bin/bash ~/Desktop/scheduler.sh -d 29"
 # /bin/bash -c "/bin/bash ~/Desktop/scheduler.sh -d 29 2>./errori"
+# bash scheduler.sh -x "bash ./scheduler.sh
+# /bin/bash -c "/bin/bash ~/Desktop/scheduler.sh -d 29 -x \"bash ~/Desktop/scheduler.sh\""
+# /bin/bash -c "/bin/bash ~/Desktop/scheduler.sh -d 29 -x \"pwd\""
 
 year=-1
 month=-1
@@ -15,7 +17,9 @@ customHostTarget=31
 
 execute=true
 
-while getopts "y:m:d:h:m:rtl:" opt; do
+TOEXEC=""
+
+while getopts "y:m:d:h:m:rtx:" opt; do
         case ${opt} in
         y)
                 year=${OPTARG}
@@ -38,6 +42,9 @@ while getopts "y:m:d:h:m:rtl:" opt; do
         t)
                 byhostname=true
                 ;;
+        x)
+                TOEXEC=${OPTARG}
+                ;;
         ?)
                 echo "Invalid option: -${OPTARG}."
                 exit 1
@@ -46,6 +53,10 @@ while getopts "y:m:d:h:m:rtl:" opt; do
 done
 
 
+if [[ ${TOEXEC} == "" ]]; then
+        echo "[$(date)] [error] NESSUNO SCRIPT SELEZIONATO" >&2
+        exit 1
+fi
 
 curyear=$(date +%Y)
 curmonth=$(date +%m)
@@ -112,13 +123,15 @@ fi
 
 
 if ${execute}; then
-        echo "[$(date)] [info] Execute"
-        echo "execute"
+        echo "[$(date)] [info] Execute: ${TOEXEC}"
+        # echo "execute"
+        bash -c "${TOEXEC}"
+        #
         exitcode=$?
         if [ ${exitcode} -eq 0 ];then
-                echo "[$(date)] [info] Execute OK"
+                echo "[$(date)] [info] Execute OK: ${TOEXEC}"
         else
-                echo "[$(date)] [error] Execute ERROR" >&2
+                echo "[$(date)] [error] Execute ERROR: ${TOEXEC}" >&2
         fi
 else
         echo "[$(date)] [info] NO Execute"

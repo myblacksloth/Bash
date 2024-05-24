@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# (C) Copyright 2024 Antonio Maulucci
+
 # abilito gli alias nello script
 shopt -s expand_aliases
 
